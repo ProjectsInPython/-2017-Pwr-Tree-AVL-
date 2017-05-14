@@ -4,6 +4,7 @@
 # https://www.cs.usfca.edu/~galles/visualization/AVLtree.html
 
 from AVL2 import insert_template_preorder
+from AVL2 import AVLTree2
 
 def insert_testCase1_onRightSide_preorder(printTree):  # rotate right -> rotate left, because + -> -
     return insert_template_preorder([3, 1, 7, 4, 10, 5], [4, 3, 1, 7, 5, 10], printTree)
@@ -34,14 +35,20 @@ if __name__ == "__main__":
     # To work in repl uncomment below
     ##################################################################
 
-    # a = AVLTree()
+    a = AVLTree2()
     # print("Please pass 'Exit' to end")
     # while messageReceivedFromUser() != 'Exit':
     #     a.insert(int(newKey))
     #     a.display()
 
+
 ##################################################################
 
+    # inlist = [7, 5, 2, 6, 3, 4, 1, 8, 9, 0]
+    # for i in inlist:
+    #     a.insert(i)
+    # a.display()
+    #
     # print "----- Deleting -------"
     # a.delete(3)
     # a.delete(4)

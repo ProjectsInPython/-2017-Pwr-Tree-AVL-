@@ -60,20 +60,20 @@ class AVLTree2:
 
         while self.balance < -1 or self.balance > 1:
             if self.balance > 1:
-                if self.node.left.balance < 0:
-                    self.node.left.lrotate()
-                    self.update_heights(True)
-                    self.update_balances(True)
-                self.rrotate()
-                self.update_heights(True)
-                self.update_balances(True)
-
-            if self.balance < -1:
-                if self.node.right.balance > 0:
+                if self.node.right.balance < 0:
                     self.node.right.rrotate()
                     self.update_heights(True)
                     self.update_balances(True)
                 self.lrotate()
+                self.update_heights(True)
+                self.update_balances(True)
+
+            if self.balance < -1:
+                if self.node.left.balance > 0:
+                    self.node.left.lrotate()
+                    self.update_heights(True)
+                    self.update_balances(True)
+                self.rrotate()
                 self.update_heights(True)
                 self.update_balances(True)
 
@@ -118,7 +118,7 @@ class AVLTree2:
                 if self.node.right:
                     self.node.right.update_balances(True)
 
-            self.balance = self.node.left.height - self.node.right.height
+            self.balance = self.node.right.height - self.node.left.height
         else:
             self.balance = 0
 
