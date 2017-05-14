@@ -2,6 +2,8 @@
 
 outputdebug = False
 newKey = ''
+# To visualize how does it work, look on this webpage
+# https://www.cs.usfca.edu/~galles/visualization/AVLtree.html
 
 def debug(msg):
     if outputdebug:
@@ -280,29 +282,33 @@ def testCase2_preorder():
     a.display()
     return a.preorder_traverse() == [5, 3, 2, 4, 9, 7, 6, 8, 10, 11]
 
-
-def testCase1_onRightSide_preorder():  # rotate right -> rotate left, because + -> -
-    inSequence = [3, 1, 7, 4, 10, 5]
+def insert_template_preorder(inSequence, expectedPreorder, printTree):
     print '\nInserting: ' + str(inSequence)
 
     a = AVLTree()
     for i in inSequence:
         a.insert(i)
 
-    a.display()
-    return a.preorder_traverse() == [4, 3, 1, 7, 5, 10]
+    if printTree:
+        a.display()
+
+    return a.preorder_traverse() == expectedPreorder
+
+def insert_testCase1_onRightSide_preorder(printTree):  # rotate right -> rotate left, because + -> -
+    return insert_template_preorder([3, 1, 7, 4, 10, 5], [4, 3, 1, 7, 5, 10], printTree)
 
 
-def testCase2_onRightSide_preorder():  # rotate left, because + -> +
-    inSequence = [3, 1, 7, 4, 10, 11]
-    print '\nInserting: ' + str(inSequence)
+def insert_testCase2_onRightSide_preorder(printTree):  # rotate left, because + -> +
+    return insert_template_preorder([3, 1, 7, 4, 10, 11], [7, 3, 1, 4, 10, 11], printTree)
 
-    a = AVLTree()
-    for i in inSequence:
-        a.insert(i)
 
-    a.display()
-    return a.preorder_traverse() == [7, 3, 1, 4, 10, 11]
+def insert_testCase1_onLeftSide_preorder(printTree):  # rotate left -> rotate right, because - -> +
+    return insert_template_preorder([8, 10, 4, 3, 5, 6], [5, 4, 3, 8, 6, 10], printTree)
+%
+
+def insert_testCase2_onLeftSide_preorder(printTree):  # rotate right because - -> -
+    return insert_template_preorder([8, 10, 4, 3, 5, 2], [4, 3, 2, 8, 5, 10], printTree)
+
 
 # Usage example
 if __name__ == "__main__":
@@ -310,8 +316,12 @@ if __name__ == "__main__":
     print testCase1_preorder()
     print testCase2_preorder()
 
-    print testCase1_onRightSide_preorder()
-    print testCase2_onRightSide_preorder()
+    printTree = True
+    print insert_testCase1_onRightSide_preorder(printTree)
+    print insert_testCase2_onRightSide_preorder(printTree)
+
+    print insert_testCase1_onLeftSide_preorder(printTree)
+    print insert_testCase2_onLeftSide_preorder(printTree)
 
     # print("Please pass 'Exit' to end")
     # while receivedFromUser() != 'Exit':
