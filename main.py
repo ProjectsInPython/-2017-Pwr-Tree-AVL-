@@ -1,4 +1,8 @@
-from AVL import AVLTree
+#!/usr/bin/env python2
+
+# To visualize how does it work, look on this webpage
+# https://www.cs.usfca.edu/~galles/visualization/AVLtree.html
+
 from AVL import insert_template_preorder
 
 def insert_testCase1_onRightSide_preorder(printTree):  # rotate right -> rotate left, because + -> -
@@ -17,23 +21,22 @@ def insert_testCase2_onLeftSide_preorder(printTree):  # rotate right because - -
     return insert_template_preorder([8, 10, 4, 3, 5, 2], [4, 3, 2, 8, 5, 10], printTree)
 
 if __name__ == "__main__":
-    a = AVLTree()
-
-# To run test cases uncomment below
-##################################################################
+    # To run test cases uncomment below
+    ##################################################################
 
     printTree = True
-    print insert_testCase1_onRightSide_preorder(printTree)
+    # print insert_testCase1_onRightSide_preorder(printTree)
     print insert_testCase2_onRightSide_preorder(printTree)
+    #
+    # print insert_testCase1_onLeftSide_preorder(printTree)
+    # print insert_testCase2_onLeftSide_preorder(printTree)
 
-    print insert_testCase1_onLeftSide_preorder(printTree)
-    print insert_testCase2_onLeftSide_preorder(printTree)
+    # To work in repl uncomment below
+    ##################################################################
 
-# To work in repl uncomment below
-##################################################################
-
+    # a = AVLTree()
     # print("Please pass 'Exit' to end")
-    # while receivedFromUser() != 'Exit':
+    # while messageReceivedFromUser() != 'Exit':
     #     a.insert(int(newKey))
     #     a.display()
 

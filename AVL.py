@@ -1,9 +1,5 @@
-# import random, math
-
-outputdebug = False
+outputdebug = True
 newKey = ''
-# To visualize how does it work, look on this webpage
-# https://www.cs.usfca.edu/~galles/visualization/AVLtree.html
 
 def debug(msg):
     if outputdebug:
@@ -17,7 +13,7 @@ class Node():
         self.right = None
 
 
-class AVLTree():
+class AVLTree:
     def __init__(self, *args):
         self.node = None
         self.height = -1
@@ -254,7 +250,7 @@ class AVLTree():
                 self.node.right.display(level + 1, '>')
 
 
-def receivedFromUser():
+def messageReceivedFromUser():
     global newKey
     newKey = raw_input("Key to add: ")
     return newKey
