@@ -3,7 +3,7 @@
 # To visualize how does it work, look on this webpage
 # https://www.cs.usfca.edu/~galles/visualization/AVLtree.html
 
-from AVL import insert_template_preorder
+from AVL2 import insert_template_preorder
 
 def insert_testCase1_onRightSide_preorder(printTree):  # rotate right -> rotate left, because + -> -
     return insert_template_preorder([3, 1, 7, 4, 10, 5], [4, 3, 1, 7, 5, 10], printTree)
@@ -25,11 +25,11 @@ if __name__ == "__main__":
     ##################################################################
 
     printTree = True
-    # print insert_testCase1_onRightSide_preorder(printTree)
+    print insert_testCase1_onRightSide_preorder(printTree)
     print insert_testCase2_onRightSide_preorder(printTree)
     #
-    # print insert_testCase1_onLeftSide_preorder(printTree)
-    # print insert_testCase2_onLeftSide_preorder(printTree)
+    print insert_testCase1_onLeftSide_preorder(printTree)
+    print insert_testCase2_onLeftSide_preorder(printTree)
 
     # To work in repl uncomment below
     ##################################################################
