@@ -70,7 +70,6 @@ class AVLTree:
                 self.update_balances()
 
             if self.balance < -1:
-
                 if self.node.right.balance > 0:
                     self.node.right.rrotate()  # we're in case III
                     self.update_heights()

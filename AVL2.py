@@ -54,48 +54,50 @@ class AVLTree2:
         self.rebalance()
 
     def rebalance(self):
-        recursive = True
-        self.update_heights(not recursive)
-        self.update_balances(not recursive)
+        self.update_heights(recurse=False)
+        self.update_balances(recurse=False)
 
         while self.balance < -1 or self.balance > 1:
-            if self.balance > 1:
-                if self.node.right.balance < 0:
-                    self.node.right.rrotate()
-                    self.update_heights(True)
-                    self.update_balances(True)
-                self.lrotate()
-                self.update_heights(True)
-                self.update_balances(True)
-
             if self.balance < -1:
                 if self.node.left.balance > 0:
                     self.node.left.lrotate()
-                    self.update_heights(True)
-                    self.update_balances(True)
+                    self.update_heights(recurse=True)
+                    self.update_balances(recurse=True)
                 self.rrotate()
-                self.update_heights(True)
-                self.update_balances(True)
+                self.update_heights(recurse=True)
+                self.update_balances(recurse=True)
+
+            if self.balance > 1:
+                if self.node.right.balance < 0:
+                    self.node.right.rrotate()
+                    self.update_heights(recurse=True)
+                    self.update_balances(recurse=True)
+                self.lrotate()
+                self.update_heights(recurse=True)
+                self.update_balances(recurse=True)
+
 
     def rrotate(self):
+        # Rotate right pivoting on self
         debug('Rotating ' + str(self.node.key) + ' right')
-        A = self.node
-        B = self.node.left.node
-        T = B.right.node
+        X = self.node
+        Y = X.left.node
+        T = Y.right.node
 
-        self.node = B
-        B.right.node = A
-        A.left.node = T
+        self.node = Y
+        Y.right.node = X
+        X.left.node = T
 
     def lrotate(self):
+        # Rotate left pivoting on self
         debug('Rotating ' + str(self.node.key) + ' left')
-        A = self.node
-        B = self.node.right.node
-        T = B.left.node
+        X = self.node
+        Y = X.right.node
+        T = Y.left.node
 
-        self.node = B
-        B.left.node = A
-        A.right.node = T
+        self.node = Y
+        Y.left.node = X
+        X.right.node = T
 
     def update_heights(self, recurse):
         if self.node:
