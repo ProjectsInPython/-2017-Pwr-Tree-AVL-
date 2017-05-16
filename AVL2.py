@@ -53,6 +53,67 @@ class AVLTree2:
 
         self.rebalance()
 
+    def logical_successor(self, node):
+        ''' 
+        Find the smallese valued node in RIGHT child
+        '''
+        node = node.right.node
+        if node:  # just a sanity check
+
+            while node.left:
+                debug("LS: traversing: " + str(node.key))
+                if not node.left.node:
+                    return node
+                else:
+                    node = node.left.node
+        return node
+
+    def delete(self, key):
+        # debug("Trying to delete at node: " + str(self.node.key))
+        if self.node:
+            if self.node.key == key:
+                debug("Deleting ... " + str(key))
+                if not self.node.left.node and not self.node.right.node:
+                    self.node = None  # leaves can be killed at will
+                # if only one subtree, take that
+                elif not self.node.left.node:
+                    self.node = self.node.right.node
+                elif not self.node.right.node:
+                    self.node = self.node.left.node
+
+                # worst-case: both children present. Find logical successor
+                else:
+                    replacement = self.logical_successor(self.node)
+                    if replacement:  # sanity check
+                        debug("Found replacement for " + str(key) + " -> " + str(replacement.key))
+                        self.node.key = replacement.key
+
+                        # replaced. Now delete the key from right child
+                        self.node.right.delete(replacement.key)
+
+                self.rebalance()
+                return
+            elif key < self.node.key:
+                self.node.left.delete(key)
+            elif key > self.node.key:
+                self.node.right.delete(key)
+
+            self.rebalance()
+        else:
+            return
+
+    def logical_predecessor(self, node):
+        ''' 
+        Find the biggest valued node in LEFT child
+        '''
+        node = node.left.node
+        if node:
+            while node.right:
+                if not node.right.node:
+                    return node
+                else:
+                    node = node.right.node
+
     def rebalance(self):
         self.update_heights(recurse=False)
         self.update_balances(recurse=False)
@@ -164,4 +225,16 @@ def insert_template_preorder(in_sequence, expected_preorder, print_tree):
 
     return a.preorder_traverse() == expected_preorder
 
+def delete_template_preorder(in_sequence, keyToDel,  expected_preorder, print_tree):
+    print '\nDeleting: ' + str(in_sequence)
 
+    a = AVLTree2()
+    for i in in_sequence:
+        a.insert(i)
+
+    a.delete(keyToDel)
+
+    if print_tree:
+        a.display()
+
+    return a.preorder_traverse() == expected_preorder

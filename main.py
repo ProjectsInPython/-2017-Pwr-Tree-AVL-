@@ -4,6 +4,7 @@
 # https://www.cs.usfca.edu/~galles/visualization/AVLtree.html
 
 from AVL2 import insert_template_preorder
+from AVL2 import delete_template_preorder
 from AVL2 import AVLTree2
 
 def insert_testCase1_onRightSide_preorder(printTree):  # rotate right -> rotate left, because + -> -
@@ -21,16 +22,28 @@ def insert_testCase1_onLeftSide_preorder(printTree):  # rotate left -> rotate ri
 def insert_testCase2_onLeftSide_preorder(printTree):  # rotate right because - -> -
     return insert_template_preorder([8, 10, 4, 3, 5, 2], [4, 3, 2, 8, 5, 10], printTree)
 
+def delete_testCase1_upYes(printTree): # rotate left, because + -> +
+    return delete_template_preorder([4, 3, 6, 5, 2, 8, 7], 3, [6, 4, 2, 5, 8, 7], printTree)
+
+def delete_testCase2_upNo(printTree): # rotate left, because + -> +
+    return delete_template_preorder([4, 3, 6, 5, 8], 3, [6, 4, 5, 8], printTree)
+
+def delete_testCase3a(printTree): # rotate left, because + -> +
+    return delete_template_preorder([6, 3, 11, 2, 12, 9, 8], 3, [9, 6, 2, 8, 11, 12], printTree)
+
 if __name__ == "__main__":
     # To run test cases uncomment below
     ##################################################################
-
-    printTree = True
-    print insert_testCase1_onRightSide_preorder(printTree)
-    print insert_testCase2_onRightSide_preorder(printTree)
     #
-    print insert_testCase1_onLeftSide_preorder(printTree)
-    print insert_testCase2_onLeftSide_preorder(printTree)
+    # print insert_testCase1_onRightSide_preorder(printTree=True)
+    # print insert_testCase2_onRightSide_preorder(printTree=True)
+    # #
+    # print insert_testCase1_onLeftSide_preorder(printTree=True)
+    # print insert_testCase2_onLeftSide_preorder(printTree=True)
+
+    print delete_testCase1_upYes(printTree=True)
+    print delete_testCase2_upNo(printTree=True)
+    print delete_testCase3a(printTree=True)
 
     # To work in repl uncomment below
     ##################################################################
@@ -48,11 +61,11 @@ if __name__ == "__main__":
     # for i in inlist:
     #     a.insert(i)
     # a.display()
-    #
-    # print "----- Deleting -------"
+    # #
+    # # print "----- Deleting -------"
     # a.delete(3)
-    # a.delete(4)
-    # # a.delete(5)
+    # # a.delete(4)
+    # # # a.delete(5)
     # a.display()
     #
     # print
