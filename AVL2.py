@@ -1,5 +1,8 @@
 outputdebug = True
 newKey = ''
+commandReceived = ''
+breakLoop = False
+continueLoop = True
 
 
 def debug(msg):
@@ -102,18 +105,6 @@ class AVLTree2:
         else:
             return
 
-    def logical_predecessor(self, node):
-        ''' 
-        Find the biggest valued node in LEFT child
-        '''
-        node = node.left.node
-        if node:
-            while node.right:
-                if not node.right.node:
-                    return node
-                else:
-                    node = node.right.node
-
     def rebalance(self):
         self.update_heights(recurse=False)
         self.update_balances(recurse=False)
@@ -136,7 +127,6 @@ class AVLTree2:
                 self.lrotate()
                 self.update_heights(recurse=True)
                 self.update_balances(recurse=True)
-
 
     def rrotate(self):
         # Rotate right pivoting on self
@@ -212,6 +202,34 @@ class AVLTree2:
             if self.node.right:
                 self.node.right.display(level + 1, '>')
 
+    def dispatchByCommand(self):
+        if 'Insert' in commandReceived:
+            self.display()
+            self.insert(int(newKey))
+        elif 'Delete' in commandReceived:
+            self.display()
+            self.delete(newKey)
+        else:
+            print('Unknown command')
+
+        self.display()
+
+def message_received_from_user_is_proper():
+    global newKey
+    global commandReceived
+    global breakLoop
+    global continueLoop
+
+    pureInput = raw_input("Key to add: ")
+    tokenizedInput = pureInput.split(' ')
+
+    commandReceived = tokenizedInput[0]
+    if 'Exit' in commandReceived:
+        return breakLoop
+    else:
+        newKey = tokenizedInput[1]
+
+    return continueLoop
 
 def insert_template_preorder(in_sequence, expected_preorder, print_tree):
     print '\nInserting: ' + str(in_sequence)
@@ -225,12 +243,15 @@ def insert_template_preorder(in_sequence, expected_preorder, print_tree):
 
     return a.preorder_traverse() == expected_preorder
 
+
 def delete_template_preorder(in_sequence, keyToDel,  expected_preorder, print_tree):
     print '\nDeleting: ' + str(in_sequence)
 
     a = AVLTree2()
     for i in in_sequence:
         a.insert(i)
+
+    a.display()
 
     a.delete(keyToDel)
 

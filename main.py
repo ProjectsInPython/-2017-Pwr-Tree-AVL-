@@ -5,7 +5,9 @@
 
 from AVL2 import insert_template_preorder
 from AVL2 import delete_template_preorder
+from AVL2 import message_received_from_user_is_proper
 from AVL2 import AVLTree2
+from AVL2 import newKey
 
 def insert_testCase1_onRightSide_preorder(printTree):  # rotate right -> rotate left, because + -> -
     return insert_template_preorder([3, 1, 7, 4, 10, 5], [4, 3, 1, 7, 5, 10], printTree)
@@ -35,25 +37,14 @@ if __name__ == "__main__":
     # To run test cases uncomment below
     ##################################################################
     #
-    # print insert_testCase1_onRightSide_preorder(printTree=True)
-    # print insert_testCase2_onRightSide_preorder(printTree=True)
-    # #
-    # print insert_testCase1_onLeftSide_preorder(printTree=True)
-    # print insert_testCase2_onLeftSide_preorder(printTree=True)
-
-    print delete_testCase1_upYes(printTree=True)
-    print delete_testCase2_upNo(printTree=True)
-    print delete_testCase3a(printTree=True)
 
     # To work in repl uncomment below
     ##################################################################
 
     a = AVLTree2()
-    # print("Please pass 'Exit' to end")
-    # while messageReceivedFromUser() != 'Exit':
-    #     a.insert(int(newKey))
-    #     a.display()
-
+    print("Please pass 'Exit' to end")
+    while message_received_from_user_is_proper():
+        a.dispatchByCommand()
 
 ##################################################################
 

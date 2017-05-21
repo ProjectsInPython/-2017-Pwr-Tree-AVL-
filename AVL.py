@@ -251,7 +251,7 @@ def messageReceivedFromUser():
 
 
 def insert_template_preorder(inSequence, expectedPreorder, printTree):
-    print '\nInserting: ' + str(inSequence)
+    print '\nInserting GTSFO: ' + str(inSequence)
 
     a = AVLTree()
     for i in inSequence:
