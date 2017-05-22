@@ -208,7 +208,7 @@ class AVLTree2:
             self.insert(int(newKey))
         elif 'Delete' in commandReceived:
             self.display()
-            self.delete(newKey)
+            self.delete(int(newKey))
         else:
             print('Unknown command')
 
@@ -221,7 +221,7 @@ def message_received_from_user_is_proper():
     global continueLoop
 
     pureInput = raw_input("Key to add: ")
-    tokenizedInput = pureInput.split(' ')
+    tokenizedInput = pureInput.split(' ') # add protection from Insert 0- sequence
 
     commandReceived = tokenizedInput[0]
     if 'Exit' in commandReceived:
